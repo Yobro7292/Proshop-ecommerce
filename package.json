@@ -1,5 +1,15 @@
 {
+  "name": "mern-course",
+  "version": "1.0.0",
+  "description": "MERN Tutorial",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server"
+  },
+  "author": "Proshop",
+  "license": "MIT",
   "dependencies": {
-    "react-bootstrap": "^2.1.0"
+    "express": "^4.17.2"
   }
 }
