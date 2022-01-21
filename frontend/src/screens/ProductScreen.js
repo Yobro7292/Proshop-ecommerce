@@ -19,7 +19,7 @@ const ProductScreen = () => {
     }, [id])
     return (
       <div>
-       
+       {id}
        <Row>
            <Col sm={6}>
             <Image src={product.image} alt={product.name} fluid />
