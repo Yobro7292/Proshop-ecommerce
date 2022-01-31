@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import LoginScreen from './screens/LoginScreen';
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
     <Route path='/' element={<HomeScreen />} exact />
     <Route path='/home' element={<HomeScreen />} />
     <Route path='/Product/:id' element={<ProductScreen />} />
+    <Route path='/signin' element={<LoginScreen />} />
     
     </Routes>
     </Container>

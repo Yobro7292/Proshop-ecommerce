@@ -5,8 +5,7 @@ import User from '../models/userModel.js'
 //Route for auth user and generate Token for users POST route /api/users/login
 const authUser = AsyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    if(email && password)
-    {
+  
         const user = await User.findOne({ email })
         if(user && (await user.matchPassword(password))){
             res.json({
@@ -22,10 +21,8 @@ const authUser = AsyncHandler(async (req, res) => {
             res.status(401);
             throw new Error('Invalid User');
         }
-    }
-    else{
-        res.send("email and/or password is/are Null");
-    }
+    
+    
      
 })
 
