@@ -3,11 +3,13 @@ import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 
 const ProductScreen = () => {
     const { id } = useParams();
-
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
     const [product, setProduct] = useState([])
     
     useEffect(() => {
@@ -19,7 +21,7 @@ const ProductScreen = () => {
     }, [id])
     return (
       <div>
-       {id}
+      
        <Row>
            <Col sm={6}>
             <Image src={product.image} alt={product.name} fluid />
@@ -28,7 +30,7 @@ const ProductScreen = () => {
            <ListGroup variant="flush">
             <ListGroup.Item><h3>{product.name}</h3></ListGroup.Item>
             <ListGroup.Item><Rating value={product.rating} text={`${product.numReviews} reviews`} color="#ffb100" /></ListGroup.Item>
-            <ListGroup.Item> Price : ${product.price}</ListGroup.Item>
+            <ListGroup.Item> Price : { userInfo ? '$'+product.price : 'Please Login to see Price.' }</ListGroup.Item>
             <ListGroup.Item> Description : {product.description}</ListGroup.Item>
 </ListGroup>
            </Col>
@@ -41,7 +43,7 @@ const ProductScreen = () => {
                             Price:
                         </Col>
                         <Col>
-                            <strong className='text-bold'> ${product.price} </strong>
+                            <strong className='text-bold'> { userInfo ? '$'+product.price : 'Please Login to see Price.' } </strong>
                         </Col>
                     </Row>
                    </ListGroup.Item>

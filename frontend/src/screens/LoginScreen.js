@@ -28,9 +28,17 @@ const LoginScreen = ({location, history}) => {
         
     }
 
+
   return (
       <>
+      {userInfo ? (
+        
         <FormContainer>
+            <h1> Hey! {userInfo.name.split(' ')[0]}, <br /> </h1> <h4>How are you? </h4>
+             <Link to='/'> <Button variant='primary'> Go to Home Screen. </Button> </Link>
+            </FormContainer> 
+            
+        ) : <FormContainer>
             <h1> Sign In </h1>
             {error && <Message variant='danger'> {error} </Message>}
             {loading && <Loader />}
@@ -55,7 +63,10 @@ const LoginScreen = ({location, history}) => {
                     New Customer? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}> Register. </Link>
                  </Col>
             </Row>
-        </FormContainer>
+        </FormContainer> }
+
+        
+        
 
       </>
   );
