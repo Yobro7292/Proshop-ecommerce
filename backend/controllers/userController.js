@@ -62,7 +62,8 @@ const registerUser = AsyncHandler(async (req, res) => {
 
     }
     else{
-        res.send("email and/or password is/are Null");
+        res.status(204);
+        throw new Error("email and/or password is/are Null")
     }
      
 })
