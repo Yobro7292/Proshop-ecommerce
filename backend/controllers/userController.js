@@ -88,8 +88,29 @@ const getUserProfile = AsyncHandler(async (req, res) => {
         }
    })
 
+
+const removeUser = AsyncHandler(async (req, res) => {
+    const { email } = req.body;
+    if(email)
+    {
+        const userExists = await User.findOne({ email })
+        if(userExists){
+                await User.deleteOne({ email : `${email}` })
+                }  
+        else{
+            res.status(400).json({ message: "Invalid user email",})   
+        }
+
+    }
+    else{
+        res.status(204);
+        throw new Error("email and/or password is/are Null")
+    }
+     
+})
 export {
     authUser,
     getUserProfile,
-    registerUser
+    registerUser,
+    removeUser
 }

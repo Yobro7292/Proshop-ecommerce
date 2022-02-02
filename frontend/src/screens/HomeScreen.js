@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -15,10 +16,9 @@ const HomeScreen = () => {
     useEffect(() => {
        dispatch(listProducts())           
     }, [dispatch])
-
     
     return (
-        <>
+        <>  
             <h1>Latest Products Available</h1>
             {loading ? <Loader/> : error ? <Message varient='danger'></Message> : <Row>
                 {products.map((product) => (
@@ -27,6 +27,11 @@ const HomeScreen = () => {
                     </Col>
                 ))}
             </Row>}
+            <Row className='py-3'>
+                <Col>
+                    <Link to={'/remove'}> Remove User?  </Link>
+                 </Col>
+            </Row>
             
         </>
     )

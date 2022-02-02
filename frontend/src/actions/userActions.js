@@ -1,4 +1,4 @@
-import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../constants/userConstants.js"
+import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REMOVE_FAIL, USER_REMOVE_REQUEST, USER_REMOVE_SUCCESS } from "../constants/userConstants.js"
 import axios from 'axios'
 
 export const login = (email, password) => async (dispatch) => {
@@ -64,6 +64,28 @@ export const register = (name, email, password) => async (dispatch) => {
     catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        })
+    }
+}
+
+
+export const remove = (email) => async (dispatch) => {
+    try {
+        dispatch ({
+            type: USER_REMOVE_REQUEST
+        })
+        
+        const { data } = await axios.post('/api/users/remove', { email })
+        dispatch({
+                type: USER_REMOVE_SUCCESS,
+                payload: data,
+            })
+        
+    }
+    catch (error) {
+        dispatch({
+            type: USER_REMOVE_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         })
     }

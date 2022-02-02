@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 import { register } from '../actions/userActions.js';
+import { useNavigate  } from "react-router-dom";
 
 const RegisterScreen = ({location, history}) => {
 
@@ -14,16 +15,20 @@ const RegisterScreen = ({location, history}) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState(null);
-    
+    let navigate = useNavigate();
     const dispatch = useDispatch();
     const userRegister = useSelector(state => state.userRegister);
     const { loading, error, userInfo } = userRegister;
-    const redirect = '/';
+
+    const userLogin = useSelector(state => state.userLogin)
+    const login = userLogin; 
+    const data = localStorage.getItem('userInfo');
     useEffect(()=>{
-        if(userInfo){
-         
-        }
-    }, [history, userInfo, redirect]);
+        if(login && data !== null){
+                navigate('/signin');  
+                
+            }
+    }, [data, login, navigate]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -40,9 +45,10 @@ const RegisterScreen = ({location, history}) => {
 
   return (
       <>
-      <FormContainer>
+       <FormContainer>
             <h1> Register User </h1>
             {error && <Message variant='danger'> {error} </Message>}
+            {userInfo && <Message variant='success'> Registration Successfull. </Message>}
             {message && <Message variant='danger'> {message} </Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
@@ -74,15 +80,11 @@ const RegisterScreen = ({location, history}) => {
 
             <Row className='py-3'>
                 <Col>
-                    Already Account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}> Login. </Link>
+                    Already Account? <Link to={'/signin'}> Login. </Link>
                  </Col>
             </Row>
-        </FormContainer>
-
-        
-        
-
-      </>
+        </FormContainer> 
+       </>
   );
 };
 
