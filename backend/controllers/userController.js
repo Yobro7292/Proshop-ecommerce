@@ -13,6 +13,7 @@ const authUser = AsyncHandler(async (req, res) => {
                 name: user.name,
                 email: user.email,
                 isAdmin : user.isAdmin,
+                molp: user.molp,
                 token: generateToken(user._id)
             })
 
@@ -78,6 +79,7 @@ const getUserProfile = AsyncHandler(async (req, res) => {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                molp: user.molp
             })
         }
         else{
@@ -96,7 +98,8 @@ const removeUser = AsyncHandler(async (req, res) => {
         const userExists = await User.findOne({ email })
         if(userExists){
                 await User.deleteOne({ email : `${email}` })
-                }  
+                res.status(200).json({ message: userExists.name.split(" ")[0] + " kicked out."}) 
+            }  
         else{
             res.status(400).json({ message: "Invalid user email",})   
         }

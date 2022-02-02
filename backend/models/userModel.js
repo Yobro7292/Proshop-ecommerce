@@ -21,6 +21,10 @@ const userSchema = mongoose.Schema({
         required: true,
         default: false
     },
+    molp: {
+        type: Object,
+        default: null
+    },
 },{
     timestamps: true
 })

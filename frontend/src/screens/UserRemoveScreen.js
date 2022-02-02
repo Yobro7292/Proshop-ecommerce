@@ -13,8 +13,7 @@ const UserRemoveScreen = () => {
           
     const dispatch = useDispatch();
     const userRemove = useSelector(state => state.userRemove);
-    const { loading, error } = userRemove;
-
+    const { loading, error, info } = userRemove;
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin;
   
@@ -39,6 +38,7 @@ const UserRemoveScreen = () => {
        <FormContainer>
             <h1> Remove User </h1>
             {error && <Message variant='danger'> {error} </Message>}
+            {info && <Message variant='danger'> {info.message} </Message>} 
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
 

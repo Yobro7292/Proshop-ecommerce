@@ -14,6 +14,7 @@ export const login = (email, password) => async (dispatch) => {
 
         const { data } = await axios.post('/api/users/login', { email, password }, config)
 
+        console.log(data);
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data,
@@ -48,7 +49,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const { data } = await axios.post('/api/users', { name, email, password }, config)
-
+        
         dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data,
@@ -75,8 +76,15 @@ export const remove = (email) => async (dispatch) => {
         dispatch ({
             type: USER_REMOVE_REQUEST
         })
+        const config = {
+            headers: {
+                'Content-Type' : 'application/json'
+            } 
+         }
         
-        const { data } = await axios.post('/api/users/remove', { email })
+        
+        const { data } = await axios.post('/api/users/remove', { email }, config)
+       
         dispatch({
                 type: USER_REMOVE_SUCCESS,
                 payload: data,
