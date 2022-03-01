@@ -20,7 +20,7 @@ const Product = ({product}) => {
             <Card.Text as='div'> 
                 <Rating value={product.rating} text={`${product.numReviews} reviews`} color="#ffb100" /> 
             </Card.Text>
-            <Card.Text as='h3'> { userInfo ? '$'+product.price : 'Please Login to see Price.' } </Card.Text>
+            <Card.Text as='h3'> { userInfo ? '$'+product.price : 'Please Login to see Price. *' } </Card.Text>
             </Card.Body>
         </Card>
     )
